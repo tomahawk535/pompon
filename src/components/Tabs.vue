@@ -4,7 +4,7 @@
         <li v-for="tab in tabs"
             :key="tab"
             class="nav-item">
-          <a class="nav-link" :class="{ active: tab === selected }" v-bind:click="setTab(tab)"
+          <a class="nav-link" :class="{ active: tab === selected }" @click="setTab(tab)"
           >{{tab}}</a>
         </li>
       </ul>
@@ -14,7 +14,7 @@
 
 <script>
 export default {
-name: "TabsNav",
+name: "Tabs",
   components:{
 
   },

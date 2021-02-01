@@ -1,12 +1,16 @@
 <template>
-  <div class="nav_tabs">
+  <div class="t">
     <Tabs
-        :tabs="['Шаг 1: Выбор помпонов', 'Шаг 2: Доставка помпонов', 'Шаг 3: Подтверждение заказа'  ]"
+        :tabs="tabs"
         :selected="selected"
-        @selected="setSelected">
+        @selected="setSelected"
+        >
         <Tab
           :isSelected="selected === 'Шаг 1: Выбор помпонов'">
-          <p>Some test text1</p>
+          <SetCollor></SetCollor>
+          <p>
+            Seleted
+          </p>
         </Tab>
         <Tab
           :isSelected="selected === 'Шаг 2: Доставка помпонов'" >
@@ -23,20 +27,23 @@
 <script>
 import Tabs from "@/components/Tabs";
 import Tab from "@/components/Tab";
+import SetCollor from "@/components/SetCollor";
 export default {
 name: "OrderInfo",
   components:{
     Tabs,
-    Tab
+    Tab,
+    SetCollor
   },
   data() {
     return {
       selected: 'Шаг 1: Выбор помпонов',
-      // tabs: [
-      //     'Шаг 1: Выбор помпонов',
-      //     'Шаг 2: Доставка помпонов',
-      //     'Шаг 3: Подтверждение заказа'
-      // ]
+      tabs: [
+        'Шаг 1: Выбор помпонов',
+        'Шаг 2: Доставка помпонов',
+        'Шаг 3: Подтверждение заказа',
+
+      ]
 
     }
   },
