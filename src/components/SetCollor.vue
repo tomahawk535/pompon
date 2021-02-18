@@ -1,119 +1,74 @@
 <template>
-  <div class="set_color">
-    <select class="collor" v-model="selectColor">
-      <option class="collor-item"
-      v-for="pompon in pompons" :key="pompon.name" v-bind:value="pompon.img">{{pompon.name}}</option>
-    </select>
-      <p>select pompon is {{selectColor}}</p>
+  <div class="select-size">
+    <p class="color"
+       @click="areOptionVisible=!areOptionVisible"
+    >{{selectedC}}</p>
+    <div class="color-option"
+         v-if="areOptionVisible">
+      <p class="color-option-item"
+         v-for="color in selectedColor"
+         :key="color.name"
+         @click="selectColorOption(color)">
+        {{color.name}}
+
+      </p>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-name: "SetCollor",
-  pops: {
+  name: "SetColor",
+  props: {
+    selectedColor: {
+      type: Array,
+      default() {
+        [ ]
+      }
+    },
+    selectedC: {
+      type : String,
+      default: ''
+    }
   },
-  data() {
-    return{
-        pompons: [
-          {
-            'name': 'Black',
-            'img': 'bk.png'
-          },
-          {
-            'name': 'Blue',
-            'img': 'bl.png'
-          },
-          {
-            'name': 'Ceris',
-            'img': 'cs.png'
-          },
-          {
-            'name': 'Green',
-            'img': 'gn.png'
-          },
-          {
-            'name': 'Ivory',
-            'img': 'iv.png'
-          },
-          {
-            'name': 'light Blue',
-            'img': 'lb.png'
-          },
-          {
-            'name': 'Lavander',
-            'img': 'ld.png'
-          },
-          {
-            'name': 'Blue',
-            'img': 'bl.png'
-          },
-          {
-            'name': 'Lilac',
-            'img': 'll.png'
-          },
-          {
-            'name': 'Mint',
-            'img': 'mt.png'
-          },
-          {
-            'name': 'Orange',
-            'img': 'og.png'
-          },
-          {
-            'name': 'Peach',
-            'img': 'ph.png'
-          },
-          {
-            'name': 'Pink',
-            'img': 'pk.png'
-          },
-          {
-            'name': 'Purple',
-            'img': 'pr.png'
-          },
-          {
-            'name': 'Red',
-            'img': 'rd.png'
-          },
-          {
-            'name': 'White',
-            'img': 'wh.png'
-          },
-          {
-            'name': 'Yellow',
-            'img': 'yw.png'
-          },
-        ],
-      selectColor: ''
+  data (){
+    return {
+      areOptionVisible: false,
+
     }
 
   },
-  methods:{
-      setColor (selectColor){
-        this.$emit ('selectColl', selectColor)
-      }
-  }
+  methods: {
+    selectColorOption(color){
+      this.$emit('selectColorOp', color)
+      this.areOptionVisible = false;
+    },
+    hideSelect() {
+      this.areOptionVisible = false;
+    },
 
+  },
+  mounted() {
+    document.addEventListener( "click", this.hideSelect.bind(this), true)
+  },
+  beforeDestroy() {
+    document.removeEventListener( 'click',  this.hideSelect)
+  }
 
 }
 
-
-
 </script>
 
+
+
 <style scoped>
-.set_color {margin: 2rem 0}
-.collor {
+.color {
   width: 15rem;
   text-align: center;
   padding: 1rem 3rem;
   font-size: 1rem;
   text-transform: uppercase;
+  background-color: #6fcaea;
 }
-.collor-item {
-  background-color: blueviolet;
-  text-transform: uppercase;
-  padding: 0 4rem;
-}
+
 </style>
